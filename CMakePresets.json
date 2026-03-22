@@ -10,46 +10,26 @@
   "configurePresets": [
     {
       "name": "base",
-      "inherits": "base-user",
       "hidden": true,
-      "generator": "Ninja",
+      "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/bin/${presetName}",
       "cacheVariables": {
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_OSX_SYSROOT": {
-          "type": "PATH",
-          "value": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
-        }
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
     },
     {
       "name": "debug",
-      "displayName": "Debug",
-      "inherits": "base-apple",
+      "inherits": "base",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
       }
     },
     {
       "name": "release",
-      "displayName": "Release",
-      "inherits": "base-apple",
+      "inherits": "base",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
       }
-    }
-  ],
-
-  "buildPresets": [
-    {
-      "name": "debug",
-      "displayName": "Debug",
-      "configurePreset": "debug"
-    },
-    {
-      "name": "release",
-      "displayName": "Release",
-      "configurePreset": "release"
     }
   ]
 }
