@@ -1,5 +1,5 @@
-# # "cmake-lists": swiftguard, "author": alessandromanzini
-# swiftguard lib specific logic here.
+# # "cmake-lists": mongoose, "author": alessandromanzini
+# mongoose lib specific logic here.
 #
 
 # ========================================
@@ -16,8 +16,28 @@ set( SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src )
 set( INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include )
 
 # create object lib for single compile static/shared linking
-file( GLOB_RECURSE SOURCE_FILES ${SRC_DIR}/*.cpp )
-add_library( ${OBJECT_TARGET} OBJECT ${SOURCE_FILES} )
+add_library( ${OBJECT_TARGET} OBJECT )
+
+# glob shared sources
+file( GLOB_RECURSE TARGET_SOURCES ${SRC_DIR}/shared/*.cpp )
+
+# glob platform specific
+if( APPLE )
+    target_link_libraries( ${OBJECT_TARGET} PRIVATE "-framework Cocoa" )
+
+    file( GLOB_RECURSE APPLE_OBJ_C_FILES ${SRC_DIR}/apple/*.mm )
+    set_source_files_properties( ${APPLE_OBJ_C_FILES} PROPERTIES
+                                 SKIP_PRECOMPILE_HEADERS ON
+                                 COMPILE_FLAGS "-Wno-pedantic" )
+
+    list( APPEND TARGET_SOURCES ${APPLE_OBJ_C_FILES} )
+elseif( WIN32 )
+    file( GLOB_RECURSE WIN32_CPP_FILES ${SRC_DIR}/win32/*.cpp )
+    list( APPEND TARGET_SOURCES ${WIN32_CPP_FILES} )
+endif( )
+
+# add sources to target
+target_sources( ${OBJECT_TARGET} PRIVATE ${TARGET_SOURCES} )
 
 # set object target compile options
 include( target_compile_options_strict )

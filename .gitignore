@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+CMakeUserPresets.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -33,8 +34,9 @@ bld/
 [Ll]ogs/
 [Oo]ut/
 
-# Testing
+# Project-specific files
 [Tt]est/
+!*/src/[Ww][Ii][Nn]32/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -46,9 +48,6 @@ Generated\ Files/
 
 # CLion
 #.idea/
-
-# CMake
-CMakeUserPresets.json
 
 # Claude
 CLAUDE.md

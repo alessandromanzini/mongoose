@@ -1,10 +1,10 @@
-# "cmake-lists": swiftguard, "author": alessandromanzini
+# "cmake-lists": mongoose, "author": alessandromanzini
 # top-level cmake file, includes the lib and test subdirectories.
 #
 cmake_minimum_required( VERSION 3.29 )
-project( swiftguard
+project( mongoose
          VERSION 0.1.0
-         DESCRIPTION "A modern C++ logging library"
+         DESCRIPTION "A modern C++ error handling library."
          LANGUAGES CXX )
 
 
@@ -75,10 +75,7 @@ list( APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" )
 # PROJECT OPTIONS
 # ========================================
 
-option( SWIFTLOG_BUILD_TESTS "Build test executable" ON )
-#option( SWIFTLOG_BUILD_EXAMPLES "Build example applications" OFF )
-#option( SWIFTLOG_BUILD_DOCUMENTATION "Build documentation" OFF )
-#option( SWIFTLOG_ENABLE_PROFILING "Enable profiling support" OFF )
+option( MONGOOSE_BUILD_TESTS "Build test executable" ON )
 
 
 # ========================================
@@ -89,6 +86,6 @@ option( SWIFTLOG_BUILD_TESTS "Build test executable" ON )
 add_subdirectory( "lib" )
 
 # test executable
-if( SWIFTLOG_BUILD_TESTS )
+if( ${MONGOOSE_BUILD_TESTS} )
     add_subdirectory( "test" )
 endif()
