@@ -1,6 +1,8 @@
+include(get_ms_timestamp)
+
 function( generate_umbrella_header )
     #
-    string( TIMESTAMP T_START "%s" UTC )
+    get_ms_timestamp( T_START_MS )
     #
     #
     # ========================================
@@ -72,9 +74,9 @@ function( generate_umbrella_header )
     # ========================================
     # LOG STATUS
     # ========================================
-    string( TIMESTAMP T_END "%s" UTC )
-    math( EXPR T_ELAPSED "${T_END} - ${T_START}" )
-    message( STATUS "Umbrella header generation done (${T_ELAPSED}s)" ) # TODO: write script for better timestamp precision
+    get_ms_timestamp( T_END_MS )
+    math( EXPR T_ELAPSED "(${T_END_MS} - ${T_START_MS}) / 1000" )
+    message( STATUS "Umbrella header generation done (${T_ELAPSED}s)" )
     message( STATUS "Umbrella header written to: ${OUTPUT_FILE_PATH}" )
     #
 endfunction()
